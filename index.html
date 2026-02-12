@@ -43,6 +43,19 @@ body {
   box-shadow:0px 8px 15px rgba(0,0,0,0.3);
 }
 
+/* Floating hearts first page */
+.startHeart {
+  position:absolute;
+  font-size:20px;
+  animation:float 6s linear infinite;
+  opacity:0.7;
+}
+@keyframes float {
+  0% {transform: translateY(0) translateX(0);}
+  50% {transform: translateY(-20px) translateX(10px);}
+  100% {transform: translateY(0) translateX(0);}
+}
+
 /* ===== Second Page ===== */
 #secondPage {
   display:none;
@@ -51,7 +64,7 @@ body {
   color:#ff3366;
   position:fixed;
   top:0; left:0;
-  width:100%; height:100%; /* FULL SCREEN */
+  width:100%; height:100%;
   justify-content:center;
   align-items:center;
   overflow:hidden;
@@ -95,17 +108,16 @@ button {
   content:"";
   position:absolute; top:0; left:0;
   width:100%; height:100%;
-  background-image: url('love.jpg');
+  background-image: url('love.jpg'); /* Replace with your photo file name */
   background-size:cover;
   background-position:center;
   filter: brightness(0.85);
   z-index:-1;
 }
-
 /* Texts in third page */
 #loveText {
   position:absolute;
-  top:60%; /* Slightly below center */
+  top:60%; /* slightly below center */
   left:-100%;
   transform:translateY(-50%);
   font-size:36px; font-weight:bold;
@@ -171,52 +183,53 @@ button {
 </div>
 
 <script>
+/* Cute NO texts */
 const noTexts=[
-"No?? really? 🥺","Please reconsider 💔","I brought chocolates 🍫",
-"I will share my fries 🍟","I'll do the dishes forever 😭",
-"Free hugs daily 🤗","Try clicking YES 😌","The YES button is cuter 💞",
-"You can't escape destiny 😏","Pretty please 😘"
+"No?? really? 🥺",
+"Please reconsider 💔",
+"Free hugs daily 🤗",
+"Try clicking YES 😌",
+"The YES button is cuter 💞",
+"You can't escape destiny 😏",
+"Pretty please 😘",
+"Wrong button sweetheart 😜",
 ];
 
-/* First Page floating hearts */
-function createFloatingHearts(num, colors, container='body', cls='startHeart'){
-  let colorArray = colors.split(',');
-  for(let i=0;i<num;i++){
-    let fHeart=document.createElement("div");
-    fHeart.className=cls;
-    fHeart.style.left=Math.random()*window.innerWidth+"px";
-    fHeart.style.fontSize=(10+Math.random()*25)+"px";
-    fHeart.style.color=colorArray[Math.floor(Math.random()*colorArray.length)];
-    fHeart.innerHTML="💖";
-    document.querySelector(container).appendChild(fHeart);
-  }
-}
-
-/* Open envelope */
+/* Open envelope from first page */
 function openEnvelope(){
   document.getElementById("firstPage").style.display="none";
   document.getElementById("secondPage").style.display="flex";
 }
 
-/* NO hover */
+/* NO hover - stays visible and moves randomly */
 function moveNo(){
-  let btn=document.getElementById("noBtn");
-  let x=Math.random()*(window.innerWidth-120);
-  let y=Math.random()*(window.innerHeight-120);
-  btn.style.position="absolute";
-  btn.style.left=x+"px";
-  btn.style.top=y+"px";
-  btn.innerHTML=noTexts[Math.floor(Math.random()*noTexts.length)];
+  let btn = document.getElementById("noBtn");
+  
+  // Ensure button stays fully on screen
+  let btnWidth = btn.offsetWidth;
+  let btnHeight = btn.offsetHeight;
+  let maxX = window.innerWidth - btnWidth - 10; 
+  let maxY = window.innerHeight - btnHeight - 10;
+  
+  let x = Math.random() * maxX;
+  let y = Math.random() * maxY;
+  
+  btn.style.position = "absolute";
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+  
+  // Change text each move
+  btn.innerHTML = noTexts[Math.floor(Math.random() * noTexts.length)];
 }
 
-/* YES Click */
+/* YES Click - show photo page */
 function yesClick(){
   document.getElementById("secondPage").style.display="none";
   document.getElementById("thirdPage").style.display="block";
 
   // Continuous hearts
   setInterval(()=>{
-    let heart=document.createElement("div");
+    let heart = document.createElement("div");
     heart.className="heart";
     heart.style.left=Math.random()*window.innerWidth+"px";
     heart.style.fontSize=(15+Math.random()*25)+"px";
@@ -227,7 +240,7 @@ function yesClick(){
 
   // Continuous confetti
   setInterval(()=>{
-    let conf=document.createElement("div");
+    let conf = document.createElement("div");
     conf.className="confetti";
     conf.style.left=Math.random()*window.innerWidth+"px";
     conf.style.backgroundColor=["#ff3366","#ff6699","#ff99cc","#ffe6f0"][Math.floor(Math.random()*4)];
