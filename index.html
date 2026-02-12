@@ -125,6 +125,24 @@ z-index:-1;
   animation:fadeIn 1s forwards;
 }
 
+/* glowing ONLY for line4 */
+.line4{
+  font-size:36px;
+  color:#ffc0e1;
+  text-shadow:0 0 10px #ffc0e1,0 0 25px #ff85c2,0 0 45px #ff5ca8;
+  animation:fadeIn 1s forwards, glow 2s infinite alternate;
+  animation-delay:5s,5s;
+}
+
+/* small cute hug line */
+.line5{
+  font-size:20px;
+  color:#fff5fb;
+  font-style:italic;
+  animation-delay:6.5s;
+}
+
+
 /* Different romantic styles */
 .line1{
   font-size:34px;
@@ -244,32 +262,47 @@ no.innerHTML=noTexts[Math.floor(Math.random()*noTexts.length)];
 no.addEventListener("mouseenter",moveNo);
 no.addEventListener("touchstart",moveNo);
 
-/* YES */
 function sayYes(){
 document.getElementById("secondPage").style.display="none";
 document.getElementById("thirdPage").style.display="block";
 
-/* hearts */
+/* start effects */
+startRain();
+}
+
+/* continuous hearts & confetti */
+function startRain(){
+
 setInterval(()=>{
+  createHeart();
+  createConfetti();
+},220);
+
+}
+
+function createHeart(){
 let h=document.createElement("div");
 h.className="heart";
 h.innerHTML="💖";
 h.style.left=Math.random()*100+"vw";
-h.style.fontSize=(20+Math.random()*20)+"px";
-h.style.animationDuration=(4+Math.random()*3)+"s";
+h.style.fontSize=(18+Math.random()*20)+"px";
+h.style.animationDuration=(4+Math.random()*4)+"s";
 document.body.appendChild(h);
-},300);
 
-/* confetti */
-setInterval(()=>{
+setTimeout(()=>h.remove(),8000);
+}
+
+function createConfetti(){
 let c=document.createElement("div");
 c.className="confetti";
 c.style.left=Math.random()*100+"vw";
-c.style.background=["#ff5c8a","#ff9ab5","#ffd6ea","#ffc0d6"][Math.floor(Math.random()*4)];
-c.style.animationDuration=(3+Math.random()*2)+"s";
+c.style.background=["#ff5c8a","#ff9ab5","#ffd6ea","#ffc0d6","#ffffff"][Math.floor(Math.random()*5)];
+c.style.animationDuration=(3+Math.random()*3)+"s";
 document.body.appendChild(c);
-},200);
+
+setTimeout(()=>c.remove(),7000);
 }
+
 </script>
 
 </body>
