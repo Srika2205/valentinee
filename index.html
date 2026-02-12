@@ -2,9 +2,9 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Valentine Surprise ❤️</title>
+<title>Valentine Surprise ❤️</title>
 <style>
-/* ===== General Styles ===== */
+/* General styles */
 body {
   margin:0;
   padding:0;
@@ -14,13 +14,11 @@ body {
   background: linear-gradient(135deg,#ffe4e1,#ffd6e8);
 }
 
-/* Center content for pages */
+/* Page container */
 .page {
   position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  top:0; left:0;
+  width:100%; height:100%;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -36,13 +34,36 @@ body {
 }
 
 #envelope {
-  font-size:80px;
+  font-size:60px;
+  width:100px;
+  height:100px;
+  background:#ffccd9;
+  border-radius:15px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   cursor:pointer;
-  transition: transform 0.3s;
+  box-shadow:0px 5px 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 #envelope:hover {
   transform: scale(1.2) rotate(-5deg);
+  box-shadow:0px 8px 15px rgba(0,0,0,0.3);
+}
+
+/* Floating hearts for first page */
+.startHeart{
+  position:absolute;
+  font-size:20px;
+  animation:float 6s linear infinite;
+  opacity:0.7;
+}
+
+@keyframes float{
+  0% {transform: translateY(0) translateX(0);}
+  50% {transform: translateY(-20px) translateX(10px);}
+  100% {transform: translateY(0) translateX(0);}
 }
 
 /* ===== Second Page ===== */
@@ -51,6 +72,8 @@ body {
   flex-direction:column;
   background: linear-gradient(135deg,#ffe4e1,#ffccd9);
   color:#ff3366;
+  position:relative;
+  overflow:hidden;
 }
 
 #secondPage h1 {
@@ -65,20 +88,40 @@ body {
   margin-bottom:10px;
 }
 
-/* Buttons */
+#buttonContainer {
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  position:relative;
+}
+
 button {
   padding:12px 25px;
   font-size:20px;
   border:none;
   border-radius:20px;
-  margin:15px;
+  margin:10px;
   cursor:pointer;
   font-weight:bold;
   text-shadow:1px 1px #fff;
 }
 
 #yesBtn { background:#ff4d6d; color:white; }
-#noBtn { background:white; color:#ff3366; position:absolute; }
+#noBtn { background:white; color:#ff3366; position:relative; }
+
+/* Background hearts for second page */
+.secondHeart {
+  position:absolute;
+  font-size:20px;
+  opacity:0.6;
+  animation:floatSecond 10s linear infinite;
+}
+
+@keyframes floatSecond{
+  0% {transform: translateY(0) translateX(0);}
+  50% {transform: translateY(-15px) translateX(5px);}
+  100% {transform: translateY(0) translateX(0);}
+}
 
 /* ===== Third Page ===== */
 #thirdPage {
@@ -102,51 +145,63 @@ button {
   z-index:-1;
 }
 
+/* Texts in third page */
 #loveText {
   position:absolute;
-  top:50%; left:-100%;
+  top:45%;
+  left:-100%;
   transform:translateY(-50%);
   font-size:36px;
   font-weight:bold;
-  text-align:center;
   white-space: nowrap;
-  animation: slideText 10s linear infinite;
+  animation:slideIn 3s forwards;
 }
 
-#loveText span:first-child { color:#ffd6e8; }
-#loveText span:last-child { display:block; color:#ffb6c1; font-size:30px; }
+#loveText span:first-child{
+  font-family: 'Pacifico', cursive;
+  color:#ffd6e8;
+}
 
-@keyframes slideText{
+#loveText span:last-child{
+  display:block;
+  font-family: 'Dancing Script', cursive;
+  font-size:36px;
+  color:#ffb6c1;
+  text-shadow: 0 0 10px #ffb6c1, 0 0 20px #ff99cc, 0 0 30px #ff6699;
+  animation:glow 2s infinite alternate;
+}
+
+@keyframes slideIn{
   0% {left:-100%;}
-  50% {left:50%;}
-  100% {left:110%;}
+  100% {left:50%; transform:translateX(-50%) translateY(-50%);}
 }
 
-/* ===== Hearts & Confetti ===== */
-.heart, .startHeart{
+@keyframes glow{
+  0% {text-shadow: 0 0 5px #ffb6c1,0 0 10px #ff99cc,0 0 15px #ff6699;}
+  100% {text-shadow: 0 0 20px #ffb6c1,0 0 40px #ff99cc,0 0 60px #ff6699;}
+}
+
+/* Hearts and confetti */
+.heart, .confetti {
   position:absolute;
+  z-index:5;
+}
+
+.heart{
   font-size:20px;
-  animation:fall 5s linear infinite;
+  animation:fall 6s linear infinite;
 }
 
-@keyframes fall{
-  0% {transform: translateY(-50px);}
-  100% {transform: translateY(100vh);}
-}
-
-.confetti {
-  position: absolute;
-  width: 8px;
-  height: 8px;
+.confetti{
+  width:8px;
+  height:8px;
   border-radius:50%;
-  opacity: 0.9;
-  animation: confettiFall linear infinite;
+  opacity:0.9;
+  animation:confettiFall linear infinite;
 }
 
-@keyframes confettiFall {
-  0% {transform: translateY(-10px) rotate(0deg);}
-  100% {transform: translateY(100vh) rotate(360deg);}
-}
+@keyframes fall{0%{transform:translateY(-50px);}100%{transform:translateY(100vh);}}
+@keyframes confettiFall{0%{transform:translateY(-10px) rotate(0deg);}100%{transform:translateY(100vh) rotate(360deg);}}
 </style>
 </head>
 <body>
@@ -160,9 +215,11 @@ button {
 <!-- Second Page -->
 <div id="secondPage" class="page">
   <h1>Will you be my Valentine for a lifetime? ❤️</h1>
-  <div id="hint">Try clicking NO 😉</div>
-  <button id="yesBtn" onclick="yesClick()">YES ❤️</button>
-  <button id="noBtn" onmouseover="moveNo()">NO 😢</button>
+  <div id="hint">Try pressing NO if you dare 😉</div>
+  <div id="buttonContainer">
+    <button id="yesBtn" onclick="yesClick()">YES ❤️</button>
+    <button id="noBtn" onmouseover="moveNo()">NO 😢</button>
+  </div>
 </div>
 
 <!-- Third Page -->
@@ -174,42 +231,52 @@ button {
 </div>
 
 <script>
-/* ===== First Page ===== */
+/* NO button texts */
+const noTexts=[
+"No?? really? 🥺","Please reconsider 💔",
+"Wrong button sweetheart 😜", "My heart is beating fast 💓", "You’ll miss my hugs 🤗",
+"Free hugs daily 🤗","Try clicking YES 😌","The YES button is cuter 💞",
+"You can't escape destiny 😏","Pretty please 😘"
+];
+
+/* ===== First Page floating hearts ===== */
+function createFloatingHearts(num, colors, container='body', cls='startHeart'){
+  let colorArray = colors.split(',');
+  for(let i=0;i<num;i++){
+    let fHeart=document.createElement("div");
+    fHeart.className=cls;
+    fHeart.style.left=Math.random()*window.innerWidth+"px";
+    fHeart.style.fontSize=(10+Math.random()*25)+"px";
+    fHeart.style.color=colorArray[Math.floor(Math.random()*colorArray.length)];
+    fHeart.innerHTML="💖";
+    document.querySelector(container).appendChild(fHeart);
+  }
+}
+
+/* First Page open envelope */
 function openEnvelope(){
   document.getElementById("firstPage").style.display="none";
   document.getElementById("secondPage").style.display="flex";
-  createFloatingHearts(50,'#ff6699,#ff99cc,#ffb6c1,#ffc0cb');
+  createFloatingHearts(40,'#ff6699,#ff99cc,#ffb6c1,#ffc0cb','#secondPage','secondHeart');
 }
 
-/* ===== Second Page ===== */
-const noTexts=[
-"No?? really? 🥺",
-"Please reconsider 💔",
-"I brought chocolates 🍫",
-"I will share my fries 🍟",
-"I'll do the dishes forever 😭",
-"Free hugs daily 🤗",
-"Try clicking YES 😌",
-"The YES button is cuter 💞",
-"You can't escape destiny 😏",
-"Pretty please 😘"
-];
-
+/* Second Page NO hover */
 function moveNo(){
   let btn=document.getElementById("noBtn");
-  let x=Math.random()*(window.innerWidth-100);
-  let y=Math.random()*(window.innerHeight-100);
+  let x=Math.random()*(window.innerWidth-120);
+  let y=Math.random()*(window.innerHeight-120);
+  btn.style.position="absolute";
   btn.style.left=x+"px";
   btn.style.top=y+"px";
   btn.innerHTML=noTexts[Math.floor(Math.random()*noTexts.length)];
 }
 
-/* YES Click -> Final Romantic Page */
+/* YES Click - Third Page */
 function yesClick(){
   document.getElementById("secondPage").style.display="none";
   document.getElementById("thirdPage").style.display="block";
 
-  // Continuous hearts
+  // Hearts continuously
   setInterval(()=>{
     let heart=document.createElement("div");
     heart.className="heart";
@@ -220,7 +287,7 @@ function yesClick(){
     document.body.appendChild(heart);
   },300);
 
-  // Continuous confetti
+  // Confetti continuously
   setInterval(()=>{
     let conf=document.createElement("div");
     conf.className="confetti";
@@ -231,20 +298,6 @@ function yesClick(){
     conf.style.animationDuration=(3+Math.random()*3)+"s";
     document.body.appendChild(conf);
   },200);
-}
-
-/* Floating hearts for first page */
-function createFloatingHearts(num,colors){
-  let colorArray = colors.split(',');
-  for(let i=0;i<num;i++){
-    let fHeart=document.createElement("div");
-    fHeart.className="startHeart";
-    fHeart.style.left=Math.random()*window.innerWidth+"px";
-    fHeart.style.fontSize=(10+Math.random()*25)+"px";
-    fHeart.style.color=colorArray[Math.floor(Math.random()*colorArray.length)];
-    fHeart.innerHTML="💖";
-    document.body.appendChild(fHeart);
-  }
 }
 </script>
 </body>
