@@ -94,7 +94,8 @@ button {
   text-shadow:1px 1px #fff;
 }
 #yesBtn { background:#ff4d6d; color:white; }
-#noBtn { background:white; color:#ff3366; position:relative; }
+#noBtn { background:white; color:#ff3366; position:absolute; font-weight:bold;
+  text-shadow:1px 1px #ff9999; }
 
 /* ===== Third Page ===== */
 #thirdPage {
@@ -183,7 +184,7 @@ button {
 </div>
 
 <script>
-/* Cute NO texts */
+/* NO button texts */
 const noTexts=[
 "No?? really? 🥺",
 "Please reconsider 💔",
@@ -201,27 +202,16 @@ function openEnvelope(){
   document.getElementById("secondPage").style.display="flex";
 }
 
-/* NO hover - stays visible and moves randomly */
+/* NO button moves */
 function moveNo(){
-  let btn = document.getElementById("noBtn");
-  
-  // Ensure button stays fully on screen
-  let btnWidth = btn.offsetWidth;
-  let btnHeight = btn.offsetHeight;
-  let maxX = window.innerWidth - btnWidth - 10; 
-  let maxY = window.innerHeight - btnHeight - 10;
-  
-  let x = Math.random() * maxX;
-  let y = Math.random() * maxY;
-  
-  btn.style.position = "absolute";
-  btn.style.left = x + "px";
-  btn.style.top = y + "px";
-  
-  // Change text each move
-  btn.innerHTML = noTexts[Math.floor(Math.random() * noTexts.length)];
+  let btn=document.getElementById("no");
+  let x=Math.random()*(window.innerWidth-100);
+  let y=Math.random()*(window.innerHeight-100);
+  btn.style.left=x+"px";
+  btn.style.top=y+"px";
+  btn.innerHTML=noTexts[Math.floor(Math.random()*noTexts.length)];
 }
-
+  
 /* YES Click - show photo page */
 function yesClick(){
   document.getElementById("secondPage").style.display="none";
