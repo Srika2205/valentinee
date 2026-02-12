@@ -5,33 +5,24 @@
 <title>For My Love ❤️</title>
 
 <style>
+/* ===== Body and fonts ===== */
 body {
   margin:0;
   padding:0;
-  text-align:center;
   font-family: 'Comic Sans MS', cursive;
-  background: #ffe4e1;
   overflow:hidden;
+  background: #ffe4e1; /* soft light pink */
+  text-align:center;
 }
 
-/* Question text */
-h1 {
-  margin-top:60px;
-  font-size:30px;
-  color:#ff3366;
-  text-shadow: 2px 2px #fff;
-  font-weight:bold;
-}
-
-/* Buttons */
-button{
+/* YES / NO buttons */
+button {
   padding:12px 25px;
   font-size:20px;
   border:none;
   border-radius:20px;
   margin:20px;
   cursor:pointer;
-  position:relative;
   font-weight:bold;
   text-shadow:1px 1px #fff;
 }
@@ -49,22 +40,7 @@ button{
   text-shadow:1px 1px #ff9999;
 }
 
-/* Hidden result after YES */
-#result{
-  display:none;
-  margin-top:40px;
-  position:relative;
-  z-index:10;
-  color:white;
-}
-
-#result img{
-  width:250px;
-  border-radius:20px;
-  margin-top:20px;
-}
-
-/* Floating hearts at start */
+/* Floating hearts from start */
 .startHeart{
   position:absolute;
   font-size:20px;
@@ -77,7 +53,57 @@ button{
   100% {transform: translateY(0) translateX(0);}
 }
 
-/* Falling hearts after YES */
+/* Fullscreen result container */
+#result{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  z-index:10;
+}
+
+/* Fullscreen background photo */
+#result::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-image: url('love.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.8);
+  z-index:-1;
+}
+
+/* Glittering text in center */
+#loveText{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  color:white;
+  font-size:32px;
+  font-weight:bold;
+  text-shadow: 2px 2px #ff6699;
+  animation: glitter 1s infinite;
+  line-height:1.5;
+}
+
+/* Glitter effect */
+@keyframes glitter {
+  0% {color: #ffffff;}
+  25% {color: #ff99cc;}
+  50% {color: #ff3366;}
+  75% {color: #ffe6f0;}
+  100% {color: #ffffff;}
+}
+
+/* Hearts falling after YES */
 .heart{
   position:absolute;
   font-size:20px;
@@ -88,19 +114,6 @@ button{
 @keyframes fall{
   0% {transform: translateY(-50px);}
   100% {transform: translateY(100vh);}
-}
-
-/* Side text after YES */
-#loveText{
-  position:fixed;
-  top:20px;
-  right:20px;
-  text-align:right;
-  font-size:24px;
-  line-height:1.4;
-  color:white;
-  font-weight:bold;
-  text-shadow:2px 2px #ff6699;
 }
 
 /* Confetti */
@@ -122,17 +135,18 @@ button{
 
 <body>
 
-<h1>Hey my love 😘… will you be my forever partner? 💖</h1>
+<!-- Starting text and buttons -->
+<h1 id="questionText">Hey my love 😘… will you be my forever partner? 💖</h1>
 
 <button id="yes" onclick="yesClick()">YES ❤️</button>
 <button id="no" onmouseover="moveNo()">NO 😢</button>
 
+<!-- Result container -->
 <div id="result">
   <div id="loveText">
     Happy Valentine’s Day Love 😘<br>
     I love you forever ❤️
   </div>
-  <img src="love.jpg" alt="Our Photo">
 </div>
 
 <script>
@@ -145,8 +159,7 @@ const noTexts=[
 "Wrong button sweetheart 😜",
 "The YES button is cuter 💞",
 "You can't escape destiny 😏",
-"Last chance… promise 😇",
-"Come on… say YES 😘",
+"Last chance… promise 😇"
 ];
 
 /* NO button moves */
@@ -161,12 +174,13 @@ function moveNo(){
 
 /* YES button click */
 function yesClick(){
+  // Hide question and buttons
   document.getElementById("yes").style.display="none";
   document.getElementById("no").style.display="none";
+  document.getElementById("questionText").style.display="none";
+  
+  // Show result
   document.getElementById("result").style.display="block";
-
-  // Romantic gradient background
-  document.body.style.background="linear-gradient(to bottom, #ff3366, #ff6699)";
 
   // Hearts raining
   for(let i=0;i<50;i++){
@@ -189,6 +203,16 @@ function yesClick(){
     conf.style.height=(5+Math.random()*8)+"px";
     conf.style.animationDuration=(3+Math.random()*3)+"s";
     document.body.appendChild(conf);
+  }
+
+  // Optional: small floating hearts
+  for(let i=0;i<20;i++){
+    let fHeart=document.createElement("div");
+    fHeart.className="startHeart";
+    fHeart.style.left=Math.random()*window.innerWidth+"px";
+    fHeart.style.fontSize=(15+Math.random()*25)+"px";
+    fHeart.innerHTML="💖";
+    document.body.appendChild(fHeart);
   }
 }
 
