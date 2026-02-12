@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine Surprise ❤️</title>
 <style>
-/* General body and page setup */
+/* General body setup */
 body {
   margin:0; padding:0;
   font-family: 'Comic Sans MS', cursive;
@@ -28,7 +28,6 @@ body {
   text-shadow:2px 2px #fff;
   margin-bottom:30px;
 }
-/* Envelope clickable box */
 #envelope {
   font-size:60px;
   width:100px; height:100px;
@@ -43,18 +42,6 @@ body {
   transform: scale(1.2) rotate(-5deg);
   box-shadow:0px 8px 15px rgba(0,0,0,0.3);
 }
-/* Floating hearts on first page */
-.startHeart {
-  position:absolute;
-  font-size:20px;
-  animation:float 6s linear infinite;
-  opacity:0.7;
-}
-@keyframes float {
-  0% {transform: translateY(0) translateX(0);}
-  50% {transform: translateY(-20px) translateX(10px);}
-  100% {transform: translateY(0) translateX(0);}
-}
 
 /* ===== Second Page ===== */
 #secondPage {
@@ -62,13 +49,18 @@ body {
   flex-direction:column;
   background: linear-gradient(135deg,#ffe4e1,#ffccd9);
   color:#ff3366;
-  position:relative;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%; /* FULL SCREEN */
+  justify-content:center;
+  align-items:center;
   overflow:hidden;
 }
 #secondPage h1 {
   font-size:28px;
   margin-bottom:20px;
   text-shadow:1px 1px #fff;
+  padding:0 10px;
 }
 #hint {
   font-size:16px;
@@ -90,18 +82,6 @@ button {
 }
 #yesBtn { background:#ff4d6d; color:white; }
 #noBtn { background:white; color:#ff3366; position:relative; }
-/* Background hearts second page */
-.secondHeart {
-  position:absolute;
-  font-size:20px;
-  opacity:0.6;
-  animation:floatSecond 10s linear infinite;
-}
-@keyframes floatSecond{
-  0% {transform: translateY(0) translateX(0);}
-  50% {transform: translateY(-15px) translateX(5px);}
-  100% {transform: translateY(0) translateX(0);}
-}
 
 /* ===== Third Page ===== */
 #thirdPage {
@@ -121,9 +101,12 @@ button {
   filter: brightness(0.85);
   z-index:-1;
 }
+
 /* Texts in third page */
 #loveText {
-  position:absolute; top:50%; left:-100%;
+  position:absolute;
+  top:60%; /* Slightly below center */
+  left:-100%;
   transform:translateY(-50%);
   font-size:36px; font-weight:bold;
   white-space: nowrap;
@@ -142,6 +125,7 @@ button {
   text-shadow:0 0 10px #ffb6c1,0 0 20px #ff99cc,0 0 30px #ff6699;
   animation:glow 2s infinite alternate;
 }
+
 /* Text animation */
 @keyframes slideIn{
   0% {left:-100%;}
@@ -151,6 +135,7 @@ button {
   0% {text-shadow: 0 0 5px #ffb6c1,0 0 10px #ff99cc,0 0 15px #ff6699;}
   100% {text-shadow: 0 0 20px #ffb6c1,0 0 40px #ff99cc,0 0 60px #ff6699;}
 }
+
 /* Hearts and confetti for third page */
 .heart, .confetti { position:absolute; z-index:5; }
 .heart{ font-size:20px; animation:fall 6s linear infinite; }
@@ -186,20 +171,14 @@ button {
 </div>
 
 <script>
-/* NO button texts */
 const noTexts=[
-"No?? really? 🥺",
-"Please reconsider 💔",
-"Free hugs daily 🤗",
-"Try clicking YES 😌",
-"The YES button is cuter 💞",
-"Wrong button sweetheart 😜",
-"You’ll regret saying NO 😢",
-"You can't escape destiny 😏",
-"Pretty please 😘"
- ];
+"No?? really? 🥺","Please reconsider 💔","I brought chocolates 🍫",
+"I will share my fries 🍟","I'll do the dishes forever 😭",
+"Free hugs daily 🤗","Try clicking YES 😌","The YES button is cuter 💞",
+"You can't escape destiny 😏","Pretty please 😘"
+];
 
-/* ===== First Page floating hearts ===== */
+/* First Page floating hearts */
 function createFloatingHearts(num, colors, container='body', cls='startHeart'){
   let colorArray = colors.split(',');
   for(let i=0;i<num;i++){
@@ -213,14 +192,13 @@ function createFloatingHearts(num, colors, container='body', cls='startHeart'){
   }
 }
 
-/* First Page open envelope */
+/* Open envelope */
 function openEnvelope(){
   document.getElementById("firstPage").style.display="none";
   document.getElementById("secondPage").style.display="flex";
-  createFloatingHearts(40,'#ff6699,#ff99cc,#ffb6c1,#ffc0cb','#secondPage','secondHeart');
 }
 
-/* Second Page NO hover */
+/* NO hover */
 function moveNo(){
   let btn=document.getElementById("noBtn");
   let x=Math.random()*(window.innerWidth-120);
@@ -231,7 +209,7 @@ function moveNo(){
   btn.innerHTML=noTexts[Math.floor(Math.random()*noTexts.length)];
 }
 
-/* YES Click - Third Page */
+/* YES Click */
 function yesClick(){
   document.getElementById("secondPage").style.display="none";
   document.getElementById("thirdPage").style.display="block";
