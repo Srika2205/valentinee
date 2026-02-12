@@ -109,29 +109,68 @@ z-index:-1;
 
 /* text */
 #loveText{
-position:absolute;
-top:65%;
-left:-100%;
-font-size:32px;
-color:#ffd9ec;
-white-space:nowrap;
-animation:slide 3s forwards;
-}
-#loveText span:last-child{
-display:block;
-font-size:32px;
-color:#ffc0d6;
-text-shadow:0 0 10px #ffc0d6,0 0 25px #ff7aa8,0 0 40px #ff5c8a;
-animation:glow 2s infinite alternate;
+  position:absolute;
+  top:68%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  text-align:center;
+  width:90%;
 }
 
-@keyframes slide{to{left:50%;transform:translateX(-50%);}}
-@keyframes glow{from{text-shadow:0 0 10px #ffc0d6;}to{text-shadow:0 0 40px #ff5c8a;}}
+/* Every line separate */
+#loveText span{
+  display:block;
+  margin:8px 0;
+  opacity:0;
+  animation:fadeIn 1s forwards;
+}
 
-/* falling hearts & confetti */
-.heart,.confetti{position:absolute;pointer-events:none;}
-.heart{animation:fall linear infinite;}
-.confetti{width:8px;height:8px;border-radius:50%;animation:fall linear infinite;}
+/* Different romantic styles */
+.line1{
+  font-size:34px;
+  color:#ffe4f2;
+  animation-delay:0.5s;
+}
+
+.line2{
+  font-size:34px;
+  color:#ffd1ea;
+  animation-delay:2s;
+}
+
+.line3{
+  font-size:36px;
+  font-family:'Pacifico', cursive;
+  color:#fff0f8;
+  text-shadow:0 0 10px #ff9acb;
+  animation-delay:3.5s;
+}
+
+.line4{
+  font-size:36px;
+  color:#ffc0e1;
+  text-shadow:0 0 15px #ff85c2,0 0 35px #ff5ca8;
+  animation:glow 2s infinite alternate;
+  animation-delay:5s;
+}
+
+.line5{
+  font-size:22px; /* smaller cute whisper text */
+  color:#fff;
+  animation-delay:6.5s;
+}
+
+/* Fade appear one by one */
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* glow effect */
+@keyframes glow{
+  from{text-shadow:0 0 10px #ffc0e1;}
+  to{text-shadow:0 0 40px #ff5ca8;}
+}
 
 @keyframes fall{from{transform:translateY(-10vh);}to{transform:translateY(110vh);}}
 </style>
