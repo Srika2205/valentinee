@@ -186,7 +186,10 @@ body {
   <div id="hint">Try pressing NO if you dare 😉</div>
   <div id="buttonContainer">
     <button id="yesBtn" onclick="yesClick()">YES ❤️</button>
-    <button id="noBtn" onmouseover="moveNo()">NO 😢</button>
+    <button id="noBtn"
+ontouchstart="moveNo()"
+onmouseover="moveNo()">NO 😢</button>
+
   </div>
 </div>
 
@@ -219,12 +222,30 @@ function openEnvelope(){
 
 /* NO button moves */
 function moveNo(){
-  let btn=document.getElementById("no");
-  let x=Math.random()*(window.innerWidth-100);
-  let y=Math.random()*(window.innerHeight-100);
-  btn.style.left=x+"px";
-  btn.style.top=y+"px";
-  btn.innerHTML=noTexts[Math.floor(Math.random()*noTexts.length)];
+  let btn = document.getElementById("noBtn");
+  let yes = document.getElementById("yesBtn");
+
+  // screen safe area
+  let margin = 80;
+  let maxX = window.innerWidth - btn.offsetWidth - margin;
+  let maxY = window.innerHeight - btn.offsetHeight - margin;
+
+  let x, y;
+
+  // keep trying until NOT near YES button
+  do{
+    x = Math.random()*maxX + margin/2;
+    y = Math.random()*maxY + margin/2;
+  }while(
+    Math.abs(x - yes.offsetLeft) < 120 &&
+    Math.abs(y - yes.offsetTop) < 120
+  );
+
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+
+  // change cute text
+  btn.innerHTML = noTexts[Math.floor(Math.random()*noTexts.length)];
 }
   
 /* YES Click - show photo page */
