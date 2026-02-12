@@ -4,20 +4,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine Surprise ❤️</title>
 <style>
-/* General styles */
+/* General body and page setup */
 body {
-  margin:0;
-  padding:0;
+  margin:0; padding:0;
   font-family: 'Comic Sans MS', cursive;
   overflow:hidden;
   text-align:center;
   background: linear-gradient(135deg,#ffe4e1,#ffd6e8);
 }
-
-/* Page container */
 .page {
-  position:absolute;
-  top:0; left:0;
+  position:absolute; top:0; left:0;
   width:100%; height:100%;
   display:flex;
   flex-direction:column;
@@ -32,35 +28,29 @@ body {
   text-shadow:2px 2px #fff;
   margin-bottom:30px;
 }
-
+/* Envelope clickable box */
 #envelope {
   font-size:60px;
-  width:100px;
-  height:100px;
+  width:100px; height:100px;
   background:#ffccd9;
   border-radius:15px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display:flex; justify-content:center; align-items:center;
   cursor:pointer;
   box-shadow:0px 5px 10px rgba(0,0,0,0.2);
   transition: transform 0.3s, box-shadow 0.3s;
 }
-
 #envelope:hover {
   transform: scale(1.2) rotate(-5deg);
   box-shadow:0px 8px 15px rgba(0,0,0,0.3);
 }
-
-/* Floating hearts for first page */
-.startHeart{
+/* Floating hearts on first page */
+.startHeart {
   position:absolute;
   font-size:20px;
   animation:float 6s linear infinite;
   opacity:0.7;
 }
-
-@keyframes float{
+@keyframes float {
   0% {transform: translateY(0) translateX(0);}
   50% {transform: translateY(-20px) translateX(10px);}
   100% {transform: translateY(0) translateX(0);}
@@ -75,26 +65,19 @@ body {
   position:relative;
   overflow:hidden;
 }
-
 #secondPage h1 {
   font-size:28px;
   margin-bottom:20px;
   text-shadow:1px 1px #fff;
 }
-
 #hint {
   font-size:16px;
   color:#ff99cc;
   margin-bottom:10px;
 }
-
 #buttonContainer {
-  display:flex;
-  gap:20px;
-  justify-content:center;
-  position:relative;
+  display:flex; gap:20px; justify-content:center; position:relative;
 }
-
 button {
   padding:12px 25px;
   font-size:20px;
@@ -105,18 +88,15 @@ button {
   font-weight:bold;
   text-shadow:1px 1px #fff;
 }
-
 #yesBtn { background:#ff4d6d; color:white; }
 #noBtn { background:white; color:#ff3366; position:relative; }
-
-/* Background hearts for second page */
+/* Background hearts second page */
 .secondHeart {
   position:absolute;
   font-size:20px;
   opacity:0.6;
   animation:floatSecond 10s linear infinite;
 }
-
 @keyframes floatSecond{
   0% {transform: translateY(0) translateX(0);}
   50% {transform: translateY(-15px) translateX(5px);}
@@ -126,80 +106,55 @@ button {
 /* ===== Third Page ===== */
 #thirdPage {
   display:none;
-  position:fixed;
-  top:0; left:0;
+  position:fixed; top:0; left:0;
   width:100%; height:100%;
   overflow:hidden;
   z-index:10;
 }
-
 #thirdPage::before {
   content:"";
-  position:absolute;
-  top:0; left:0;
+  position:absolute; top:0; left:0;
   width:100%; height:100%;
   background-image: url('love.jpg');
   background-size:cover;
   background-position:center;
-  filter: brightness(0.8);
+  filter: brightness(0.85);
   z-index:-1;
 }
-
 /* Texts in third page */
 #loveText {
-  position:absolute;
-  top:45%;
-  left:-100%;
+  position:absolute; top:50%; left:-100%;
   transform:translateY(-50%);
-  font-size:36px;
-  font-weight:bold;
+  font-size:36px; font-weight:bold;
   white-space: nowrap;
   animation:slideIn 3s forwards;
+  text-align:center;
 }
-
 #loveText span:first-child{
   font-family: 'Pacifico', cursive;
   color:#ffd6e8;
 }
-
 #loveText span:last-child{
   display:block;
   font-family: 'Dancing Script', cursive;
   font-size:36px;
   color:#ffb6c1;
-  text-shadow: 0 0 10px #ffb6c1, 0 0 20px #ff99cc, 0 0 30px #ff6699;
+  text-shadow:0 0 10px #ffb6c1,0 0 20px #ff99cc,0 0 30px #ff6699;
   animation:glow 2s infinite alternate;
 }
-
+/* Text animation */
 @keyframes slideIn{
   0% {left:-100%;}
   100% {left:50%; transform:translateX(-50%) translateY(-50%);}
 }
-
 @keyframes glow{
   0% {text-shadow: 0 0 5px #ffb6c1,0 0 10px #ff99cc,0 0 15px #ff6699;}
   100% {text-shadow: 0 0 20px #ffb6c1,0 0 40px #ff99cc,0 0 60px #ff6699;}
 }
-
-/* Hearts and confetti */
-.heart, .confetti {
-  position:absolute;
-  z-index:5;
-}
-
-.heart{
-  font-size:20px;
-  animation:fall 6s linear infinite;
-}
-
-.confetti{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  opacity:0.9;
-  animation:confettiFall linear infinite;
-}
-
+/* Hearts and confetti for third page */
+.heart, .confetti { position:absolute; z-index:5; }
+.heart{ font-size:20px; animation:fall 6s linear infinite; }
+.confetti{ width:8px; height:8px; border-radius:50%; opacity:0.9; animation:confettiFall linear infinite; }
 @keyframes fall{0%{transform:translateY(-50px);}100%{transform:translateY(100vh);}}
 @keyframes confettiFall{0%{transform:translateY(-10px) rotate(0deg);}100%{transform:translateY(100vh) rotate(360deg);}}
 </style>
@@ -242,7 +197,7 @@ const noTexts=[
 "You’ll regret saying NO 😢",
 "You can't escape destiny 😏",
 "Pretty please 😘"
-];
+ ];
 
 /* ===== First Page floating hearts ===== */
 function createFloatingHearts(num, colors, container='body', cls='startHeart'){
@@ -281,7 +236,7 @@ function yesClick(){
   document.getElementById("secondPage").style.display="none";
   document.getElementById("thirdPage").style.display="block";
 
-  // Hearts continuously
+  // Continuous hearts
   setInterval(()=>{
     let heart=document.createElement("div");
     heart.className="heart";
@@ -292,7 +247,7 @@ function yesClick(){
     document.body.appendChild(heart);
   },300);
 
-  // Confetti continuously
+  // Continuous confetti
   setInterval(()=>{
     let conf=document.createElement("div");
     conf.className="confetti";
