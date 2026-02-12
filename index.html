@@ -2,294 +2,235 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine Surprise ❤️</title>
+<title>For My Love ❤️</title>
+
 <style>
-/* General body setup */
-body {
-  margin:0; padding:0;
-  font-family: 'Comic Sans MS', cursive;
-  overflow:hidden;
-  text-align:center;
-  background: linear-gradient(135deg,#ffe4e1,#ffd6e8);
-}
-.page {
-  position:absolute; top:0; left:0;
-  width:100%; height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
+body{
+margin:0;
+font-family:'Comic Sans MS', cursive;
+overflow:hidden;
+background:linear-gradient(135deg,#ffe4e1,#ffd6ea);
 }
 
-/* ===== First Page ===== */
-#firstPage h1 {
-  font-size:32px;
-  color:#ff3366;
-  text-shadow:2px 2px #fff;
-  margin-bottom:30px;
-}
-#envelope {
-  font-size:60px;
-  width:100px; height:100px;
-  background:#ffccd9;
-  border-radius:15px;
-  display:flex; justify-content:center; align-items:center;
-  cursor:pointer;
-  box-shadow:0px 5px 10px rgba(0,0,0,0.2);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-#envelope:hover {
-  transform: scale(1.2) rotate(-5deg);
-  box-shadow:0px 8px 15px rgba(0,0,0,0.3);
+/* pages */
+.page{
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
 }
 
-/* Floating hearts first page */
-.startHeart {
-  position:absolute;
-  font-size:20px;
-  animation:float 6s linear infinite;
-  opacity:0.7;
+/* FIRST PAGE */
+#envelope{
+font-size:70px;
+background:#fff0f5;
+padding:25px 35px;
+border-radius:25px;
+box-shadow:0 8px 20px rgba(0,0,0,.2);
+cursor:pointer;
+transition:.3s;
 }
-@keyframes float {
-  0% {transform: translateY(0) translateX(0);}
-  50% {transform: translateY(-20px) translateX(10px);}
-  100% {transform: translateY(0) translateX(0);}
+#envelope:hover{transform:scale(1.1) rotate(-5deg);}
+
+/* SECOND PAGE */
+#secondPage{display:none;}
+
+#questionBox{
+width:90%;
+max-width:420px;
+height:420px;
+background:#fff0f8;
+border-radius:30px;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+position:relative;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 }
 
-/* ===== Second Page ===== */
-#secondPage {
-  display:none;
-  flex-direction:column;
-  background: linear-gradient(135deg,#ffe4e1,#ffccd9);
-  color:#ff3366;
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
-}
-#secondPage h1 {
-  font-size:28px;
-  margin-bottom:20px;
-  text-shadow:1px 1px #fff;
-  padding:0 10px;
-}
-#hint {
-  font-size:16px;
-  color:#ff99cc;
-  margin-bottom:10px;
+#questionBox h2{
+color:#ff4d88;
+text-align:center;
+padding:0 15px;
 }
 
-/* Buttons layout */
-#buttonContainer{
- /* container */
-#buttonContainer{
-  position:relative;
-  width:100%;
-  height:250px;
+#hint{color:#ff7aa8;font-size:14px;margin-top:8px}
+
+/* cute boxes */
+.choice{
+position:absolute;
+padding:14px 26px;
+border-radius:40px;
+background:white;
+box-shadow:0 6px 15px rgba(0,0,0,.15);
+cursor:pointer;
+user-select:none;
+transition:.25s;
 }
 
-/* Cute buttons style */
-button{
-  border:none;
-  padding:14px 26px;
-  font-size:20px;
-  border-radius:40px;
-  cursor:pointer;
-  font-family:'Comic Sans MS', cursive;
-  box-shadow:0 6px 15px rgba(0,0,0,0.15);
-  transition:all .25s ease;
+/* YES */
+#yes{
+background:linear-gradient(45deg,#ff5c8a,#ff9ab5);
+color:white;
+left:30%;
+top:70%;
 }
 
-/* YES button */
-#yesBtn{
-  position:absolute;
-  left:50%;
-  top:65%;
-  transform:translate(-50%,-50%);
-  background:linear-gradient(45deg,#ff4d6d,#ff85a2);
-  color:white;
-  z-index:2;
-}
-#yesBtn:hover{
-  transform:translate(-50%,-50%) scale(1.12);
+/* NO */
+#no{
+background:#fff;
+color:#ff5c8a;
+border:2px solid #ff9ab5;
+left:60%;
+top:70%;
 }
 
-/* NO button cute */
-#noBtn{
-  position:absolute;
-  left:65%;
-  top:65%;
-  transform:translate(-50%,-50%);
-  background:#fff0f5;
-  color:#ff4d6d;
-  border:2px solid #ff9ab5;
-  z-index:3;
+/* THIRD PAGE */
+#thirdPage{
+display:none;
+position:absolute;
+width:100%;
+height:100%;
+overflow:hidden;
+}
+#thirdPage::before{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background:url('love.jpg') center/cover no-repeat;
+filter:brightness(.85);
+z-index:-1;
 }
 
-
-/* ===== Third Page ===== */
-#thirdPage {
-  display:none;
-  position:fixed; top:0; left:0;
-  width:100%; height:100%;
-  overflow:hidden;
-  z-index:10;
-}
-#thirdPage::before {
-  content:"";
-  position:absolute; top:0; left:0;
-  width:100%; height:100%;
-  background-image: url('love.jpg'); /* Replace with your photo file name */
-  background-size:cover;
-  background-position:center;
-  filter: brightness(0.85);
-  z-index:-1;
-}
-/* Texts in third page */
-#loveText {
-  position:absolute;
-  top:60%; /* slightly below center */
-  left:-100%;
-  transform:translateY(-50%);
-  font-size:36px; font-weight:bold;
-  white-space: nowrap;
-  animation:slideIn 3s forwards;
-  text-align:center;
-}
-#loveText span:first-child{
-  font-family: 'Pacifico', cursive;
-  color:#ffd6e8;
+/* text */
+#loveText{
+position:absolute;
+top:65%;
+left:-100%;
+font-size:32px;
+color:#ffd9ec;
+white-space:nowrap;
+animation:slide 3s forwards;
 }
 #loveText span:last-child{
-  display:block;
-  font-family: 'Dancing Script', cursive;
-  font-size:36px;
-  color:#ffb6c1;
-  text-shadow:0 0 10px #ffb6c1,0 0 20px #ff99cc,0 0 30px #ff6699;
-  animation:glow 2s infinite alternate;
+display:block;
+font-size:32px;
+color:#ffc0d6;
+text-shadow:0 0 10px #ffc0d6,0 0 25px #ff7aa8,0 0 40px #ff5c8a;
+animation:glow 2s infinite alternate;
 }
 
-/* Text animation */
-@keyframes slideIn{
-  0% {left:-100%;}
-  100% {left:50%; transform:translateX(-50%) translateY(-50%);}
-}
-@keyframes glow{
-  0% {text-shadow: 0 0 5px #ffb6c1,0 0 10px #ff99cc,0 0 15px #ff6699;}
-  100% {text-shadow: 0 0 20px #ffb6c1,0 0 40px #ff99cc,0 0 60px #ff6699;}
-}
+@keyframes slide{to{left:50%;transform:translateX(-50%);}}
+@keyframes glow{from{text-shadow:0 0 10px #ffc0d6;}to{text-shadow:0 0 40px #ff5c8a;}}
 
-/* Hearts and confetti for third page */
-.heart, .confetti { position:absolute; z-index:5; }
-.heart{ font-size:20px; animation:fall 6s linear infinite; }
-.confetti{ width:8px; height:8px; border-radius:50%; opacity:0.9; animation:confettiFall linear infinite; }
-@keyframes fall{0%{transform:translateY(-50px);}100%{transform:translateY(100vh);}}
-@keyframes confettiFall{0%{transform:translateY(-10px) rotate(0deg);}100%{transform:translateY(100vh) rotate(360deg);}}
+/* falling hearts & confetti */
+.heart,.confetti{position:absolute;pointer-events:none;}
+.heart{animation:fall linear infinite;}
+.confetti{width:8px;height:8px;border-radius:50%;animation:fall linear infinite;}
+
+@keyframes fall{from{transform:translateY(-10vh);}to{transform:translateY(110vh);}}
 </style>
 </head>
+
 <body>
 
-<!-- First Page -->
-<div id="firstPage" class="page">
-  <h1>Hey Love!<br>I have something to ask you 💌</h1>
-  <div id="envelope" onclick="openEnvelope()">💌</div>
+<!-- FIRST PAGE -->
+<div class="page" id="firstPage">
+<h1 style="color:#ff4d88">Hey Love! 💌<br>I have something to ask you</h1>
+<div id="envelope" onclick="openLetter()">Open</div>
 </div>
 
-<!-- Second Page -->
-<div id="secondPage" class="page">
-  <h1>Will you be my Valentine for a lifetime? ❤️</h1>
-  <div id="hint">Try pressing NO if you dare 😉</div>
-  <div id="buttonContainer">
-    <button id="yesBtn" onclick="yesClick()">YES ❤️</button>
-    <button id="noBtn"
-<button id="noBtn"
-ontouchstart="moveNo(); return false;"
-onmouseover="moveNo()">No 🙈</button>
+<!-- SECOND PAGE -->
+<div class="page" id="secondPage">
+<div id="questionBox">
+<h2>Will you be my Valentine for a lifetime? ❤️</h2>
+<div id="hint">Try pressing NO if you dare 😉</div>
 
-  </div>
+<div id="yes" class="choice" onclick="sayYes()">YES 💖</div>
+<div id="no" class="choice">No 🥺</div>
+
+</div>
 </div>
 
-<!-- Third Page -->
+<!-- THIRD PAGE -->
 <div id="thirdPage">
-  <div id="loveText">
-    <span>Happy Valentine’s Day Love 😘</span>
-    <span>I love you forever ❤️</span>
-  </div>
+<div id="loveText">
+Happy Valentine's Day Love 😘
+<span>I love you forever ❤️</span>
+</div>
 </div>
 
 <script>
-/* NO button texts */
 const noTexts=[
-"No?? really? 🥺",
+"Are you sure? 🥺","Think again 💞",
 "Please reconsider 💔",
-"Free hugs daily 🤗",
-"Try clicking YES 😌",
-"The YES button is cuter 💞",
+"Free hugs forever 🤗",
 "You can't escape destiny 😏",
-"Pretty please 😘",
+"The YES button is cuter 💞",
 "Wrong button sweetheart 😜",
+"Press YES instead 😘","Last chance 😭","Pretty please 💗"
 ];
 
-/* Open envelope from first page */
-function openEnvelope(){
-  document.getElementById("firstPage").style.display="none";
-  document.getElementById("secondPage").style.display="flex";
+/* open envelope */
+function openLetter(){
+document.getElementById("firstPage").style.display="none";
+document.getElementById("secondPage").style.display="flex";
 }
 
-/* NO button moves */
+/* MOVE NO INSIDE BOX */
+const no=document.getElementById("no");
+const box=document.getElementById("questionBox");
+
 function moveNo(){
+const boxRect=box.getBoundingClientRect();
+const btnRect=no.getBoundingClientRect();
 
-  const btn = document.getElementById("noBtn");
-  const padding = 20;
+let maxX=boxRect.width-btnRect.width-20;
+let maxY=boxRect.height-btnRect.height-20;
 
-  // safe movement area (inside page only)
-  const maxX = window.innerWidth - btn.offsetWidth - padding;
-  const maxY = window.innerHeight - btn.offsetHeight - padding;
+let x=Math.random()*maxX;
+let y=Math.random()*maxY;
 
-  const minX = padding;
-  const minY = window.innerHeight * 0.35; // stay near buttons area
-
-  let x = Math.random() * (maxX - minX) + minX;
-  let y = Math.random() * (maxY - minY) + minY;
-
-  btn.style.left = x + "px";
-  btn.style.top = y + "px";
-
-  // change text
-  btn.innerHTML = noTexts[Math.floor(Math.random()*noTexts.length)];
+no.style.left=x+"px";
+no.style.top=y+"px";
+no.innerHTML=noTexts[Math.floor(Math.random()*noTexts.length)];
 }
 
-  
-/* YES Click - show photo page */
-function yesClick(){
-  document.getElementById("secondPage").style.display="none";
-  document.getElementById("thirdPage").style.display="block";
+no.addEventListener("mouseenter",moveNo);
+no.addEventListener("touchstart",moveNo);
 
-  // Continuous hearts
-  setInterval(()=>{
-    let heart = document.createElement("div");
-    heart.className="heart";
-    heart.style.left=Math.random()*window.innerWidth+"px";
-    heart.style.fontSize=(15+Math.random()*25)+"px";
-    heart.innerHTML="💖";
-    heart.style.animationDuration=(4+Math.random()*3)+"s";
-    document.body.appendChild(heart);
-  },300);
+/* YES */
+function sayYes(){
+document.getElementById("secondPage").style.display="none";
+document.getElementById("thirdPage").style.display="block";
 
-  // Continuous confetti
-  setInterval(()=>{
-    let conf = document.createElement("div");
-    conf.className="confetti";
-    conf.style.left=Math.random()*window.innerWidth+"px";
-    conf.style.backgroundColor=["#ff3366","#ff6699","#ff99cc","#ffe6f0"][Math.floor(Math.random()*4)];
-    conf.style.width=(5+Math.random()*8)+"px";
-    conf.style.height=(5+Math.random()*8)+"px";
-    conf.style.animationDuration=(3+Math.random()*3)+"s";
-    document.body.appendChild(conf);
-  },200);
+/* hearts */
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💖";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(20+Math.random()*20)+"px";
+h.style.animationDuration=(4+Math.random()*3)+"s";
+document.body.appendChild(h);
+},300);
+
+/* confetti */
+setInterval(()=>{
+let c=document.createElement("div");
+c.className="confetti";
+c.style.left=Math.random()*100+"vw";
+c.style.background=["#ff5c8a","#ff9ab5","#ffd6ea","#ffc0d6"][Math.floor(Math.random()*4)];
+c.style.animationDuration=(3+Math.random()*2)+"s";
+document.body.appendChild(c);
+},200);
 }
 </script>
+
 </body>
 </html>
