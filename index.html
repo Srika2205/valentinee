@@ -107,7 +107,7 @@ filter:brightness(.85);
 z-index:-1;
 }
 
-/* text */
+/* LOVE TEXT CONTAINER */
 #loveText{
   position:absolute;
   top:68%;
@@ -117,7 +117,7 @@ z-index:-1;
   width:90%;
 }
 
-/* Every line separate */
+/* every line appears separately */
 #loveText span{
   display:block;
   margin:8px 0;
@@ -125,11 +125,26 @@ z-index:-1;
   animation:fadeIn 1s forwards;
 }
 
-/* glowing FOREVER line */
+/* first line */
+.line1{
+  font-size:34px;
+  color:#ffe4f2;
+  animation-delay:0.5s;
+}
+
+/* second line */
+.line2{
+  font-size:34px;
+  color:#ffd1ea;
+  animation-delay:2s;
+}
+
+/* glowing "I love you forever" */
 .line3{
   font-size:36px;
   font-family:'Pacifico', cursive;
-  color:#fff0f8;
+  color:#ffc0e1;
+  text-shadow:0 0 10px #ffc0e1,0 0 25px #ff85c2,0 0 45px #ff5ca8;
   animation:fadeIn 1s forwards, glow 2s infinite alternate;
   animation-delay:3.5s,3.5s;
 }
@@ -137,54 +152,19 @@ z-index:-1;
 /* small cute hug line */
 .line4{
   font-size:20px;
-  color:#fff;
+  color:#fff5fb;
   font-style:italic;
+  animation:fadeIn 1s forwards;
   animation-delay:5s;
 }
 
-
-/* Different romantic styles */
-.line1{
-  font-size:34px;
-  color:#ffe4f2;
-  animation-delay:0.5s;
-}
-
-.line2{
-  font-size:34px;
-  color:#ffd1ea;
-  animation-delay:2s;
-}
-
-.line3{
-  font-size:36px;
-  font-family:'Pacifico', cursive;
-  color:#fff0f8;
-  text-shadow:0 0 10px #ff9acb;
-  animation-delay:3.5s;
-}
-
-.line4{
-  font-size:36px;
-  color:#ffc0e1;
-  text-shadow:0 0 15px #ff85c2,0 0 35px #ff5ca8;
-  animation:glow 2s infinite alternate;
-  animation-delay:5s;
-}
-
-.line5{
-  font-size:22px; /* smaller cute whisper text */
-  color:#fff;
-  animation-delay:6.5s;
-}
-
-/* Fade appear one by one */
+/* fade-in animation for all lines */
 @keyframes fadeIn{
   from{opacity:0; transform:translateY(20px);}
   to{opacity:1; transform:translateY(0);}
 }
 
-/* glow effect */
+/* glowing animation for line3 */
 @keyframes glow{
   from{text-shadow:0 0 10px #ffc0e1;}
   to{text-shadow:0 0 40px #ff5ca8;}
