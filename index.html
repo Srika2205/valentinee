@@ -125,21 +125,21 @@ z-index:-1;
   animation:fadeIn 1s forwards;
 }
 
-/* glowing ONLY for line4 */
-.line4{
+/* glowing FOREVER line */
+.line3{
   font-size:36px;
-  color:#ffc0e1;
-  text-shadow:0 0 10px #ffc0e1,0 0 25px #ff85c2,0 0 45px #ff5ca8;
+  font-family:'Pacifico', cursive;
+  color:#fff0f8;
   animation:fadeIn 1s forwards, glow 2s infinite alternate;
-  animation-delay:5s,5s;
+  animation-delay:3.5s,3.5s;
 }
 
 /* small cute hug line */
-.line5{
+.line4{
   font-size:20px;
-  color:#fff5fb;
+  color:#fff;
   font-style:italic;
-  animation-delay:6.5s;
+  animation-delay:5s;
 }
 
 
@@ -190,9 +190,35 @@ z-index:-1;
   to{text-shadow:0 0 40px #ff5ca8;}
 }
 
-@keyframes fall{from{transform:translateY(-10vh);}to{transform:translateY(110vh);}}
+
+/* falling hearts */
+.heart{
+position:fixed;
+top:-20px;
+pointer-events:none;
+animation:fall linear forwards;
+}
+
+/* confetti */
+.confetti{
+position:fixed;
+top:-10px;
+width:8px;
+height:14px;
+border-radius:3px;
+pointer-events:none;
+animation:fall linear forwards;
+}
+
+/* falling animation */
+@keyframes fall{
+to{
+transform:translateY(110vh) rotate(360deg);
+opacity:0.9;
+}
+}
+
 </style>
-</head>
 
 <body>
 
